@@ -16,6 +16,17 @@ EXPOSE 69
 
 VOLUME ["/sys/fs/cgroup", "/var/lib/postgresl/"]
 
+# Install MaaS
+RUN apt update \
+    && apt-get install -y software-properties-common \
+    && apt-add-repository -yu ppa:maas/${MAAS_VERSION} \
+    && apt update \
+    && apt install -y maas net-tools systemd \
+    && apt autoremove -y
+
+# we don't want/need avahi-daemon running in the container
+RUN rm -f /etc/init.d/avahi-daemon
+
 # Don't start any optional services except for the few we need.
 RUN find /etc/systemd/system \
     /lib/systemd/system \
@@ -25,17 +36,6 @@ RUN find /etc/systemd/system \
     -not -name '*systemd-user-sessions*' \
     -exec rm \{} \;
 RUN systemctl set-default multi-user.target
-
-# Install MaaS
-RUN apt update \
-    && apt-get install -y software-properties-common \
-    && apt-add-repository -yu ppa:maas/${MAAS_VERSION} \
-    && apt update \
-    && apt install -y maas net-tools \
-    && apt autoremove -y
-
-# we don't want/need avahi-daemon running in the container
-RUN rm -f /etc/init.d/avahi-daemon
 
 COPY entrypoint.sh /
 
