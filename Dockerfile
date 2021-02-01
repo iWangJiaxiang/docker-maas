@@ -39,6 +39,6 @@ RUN systemctl set-default multi-user.target
 
 COPY entrypoint.sh /
 
-CMD ["/sbin/init", "--log-target=console 3>&1"]
+CMD ["/sbin/init", "--log-target=console", "3>&1"]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
