@@ -14,7 +14,7 @@ EXPOSE 67
 # TFTP udp
 EXPOSE 69
 
-VOLUME ["/sys/fs/cgroup", "/var/lib/postgresl/"]
+VOLUME ["/sys/fs/cgroup", "/var/lib/postgresql"]
 
 # Install MaaS
 RUN apt update \

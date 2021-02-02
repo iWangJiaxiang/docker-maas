@@ -11,7 +11,7 @@ docker run -it \
     --name=ubuntu-maas \
     -d \
     -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-    -v data:/var/lib/postgresl/ \
+    -v $PWD/data:/var/lib/postgresql/ \
     --privileged \
     -p 5240:5240 \
     wangjiaxiang/maas:dev
