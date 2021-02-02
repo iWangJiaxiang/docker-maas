@@ -14,8 +14,7 @@ docker run -it \
     -v data:/var/lib/postgresl/ \
     --privileged \
     -p 5240:5240 \
-    wangjiaxiang/maas:dev \
-    /sbin/init --log-target=console 3>&1
+    wangjiaxiang/maas:dev
 docker exec -it ubuntu-maas bash
 ```
 
